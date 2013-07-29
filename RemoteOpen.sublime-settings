@@ -11,9 +11,7 @@
 	// I.e. Where you have mapped the remote locations too locally.
 	"path_maps": {
 		// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
-		// UNIX to WINDOWS
 		// "/home/username/work": "G:/"
-		// UNIX to UNIX
 		// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
 	}
 }
