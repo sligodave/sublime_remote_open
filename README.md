@@ -1,4 +1,4 @@
-sublime_remote_open
+Sublime Remote Open
 ===================
 
 A Sublime Text 2/3 plugin that allow you to open files in a running sublime text instance from a remote machine.
