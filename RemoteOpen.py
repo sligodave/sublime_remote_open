@@ -84,21 +84,32 @@ class RemoteOpenStartServerListenCommand(sublime_plugin.WindowCommand):
                 connection.settimeout(None)
                 args = connection.recv(self.read_rate).decode('utf-8')
                 args = args.split('\x0D')
-                org_file_path = file_path = args[0]
+                org_path = path = args[0]
                 line_no = ''
-                loc = file_path.rfind(':')
-                if loc != -1 and file_path[loc + 1:].isdigit():
-                    line_no = ':' + file_path[loc + 1:]
-                    file_path = file_path[:loc]
-                log('Remote Path Received: "%s"' % file_path)
-                file_path = remote_to_local(file_path)
-                log('Local Path Generated: "%s"' % file_path)
-                if not os.path.exists(file_path):
-                    sublime.status_message('Could not map and open "%s"' % org_file_path)
-                    log('File "%s" from "%s" does not exist' % (file_path, org_file_path))
+                loc = path.rfind(':')
+                if loc != -1 and path[loc + 1:].isdigit():
+                    line_no = ':' + path[loc + 1:]
+                    path = path[:loc]
+                log('Remote Path Received: "%s"' % path)
+                path = remote_to_local(path)
+                log('Local Path Generated: "%s"' % path)
+                if not os.path.exists(path):
+                    sublime.status_message('Could not map and open "%s"' % org_path)
+                    log('Path "%s" from "%s" does not exist' % (path, org_path))
                 else:
-                    file_path += line_no
-                    self.window.open_file(file_path, sublime.ENCODED_POSITION)
+                    file_paths = [path]
+                    if os.path.isdir(path):
+                        if settings.get('open_directory_contents', True):
+                            file_paths = get_file_paths(
+                                path,
+                                settings.get('open_directory_recursively', False)
+                            )
+                        else:
+                            sublime.status_message('RemoteOpen: Not configured to open directories, so "%s" ignored.' % path)
+                            log('Not configured to open directories, so "%s" ignored.' % path)
+                    for file_path in file_paths:
+                        file_path += line_no
+                        self.window.open_file(file_path, sublime.ENCODED_POSITION)
                 connection.close()
                 connection = None
             except socket.timeout:
@@ -127,3 +138,12 @@ def remote_to_local(path):
             path = local + '/' + common
     path = path.replace('\\', '/')
     return path
+
+
+def get_file_paths(path, recursive=False):
+    file_paths = []
+    for root, dirs, files in os.walk(path):
+        file_paths.extend([os.path.join(root, x) for x in files])
+        if not recursive:
+            break
+    return file_paths

@@ -13,5 +13,10 @@
 		// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
 		// "/home/username/work": "G:/"
 		// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
-	}
+	},
+	// Should the server open all files in a directory when one is sent
+	"open_directory_contents": true,
+	// Should the server open all files recursively in a directories sub structure.
+	// Requires "open_directories" to be
+	"open_directory_recursively": true
 }

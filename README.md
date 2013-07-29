@@ -39,7 +39,12 @@ Clone this repository into your Sublime Text *Packages* directory.
 			// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
 			// "/home/username/work": "G:/"
 			// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
-		}
+		},
+		// Should the server open all files in a directory when one is sent
+		"open_directory_contents": true,
+		// Should the server open all files recursively in a directories sub structure.
+		// Requires "open_directories" to be
+		"open_directory_recursively": true
 	}
 ```
 	The above are the defaults.
@@ -77,6 +82,13 @@ Run the supplied *subl* commmand on your remote machine, passing it a file to op
 The command and accompanying python will take care of the paths etc from here and
 send the request to the server to open the file on the local machine.
 
+You can specify a line number to open the file at also by using the ':' standard.
+E.g.
+
+    subl FILE_TO_OPEN.EXT:45
+
+Will open the file with the cursor on line 45.
+
 ## Troubleshooting
 
 I've had not problems so far but I'll add things here as they come up.
@@ -87,8 +99,7 @@ Off hand, if you are having trouble connecting to the listening Sublime Text fro
 
 * Configuration to allow server to run automatically on startup of Sublime Text.
 * Configuration to allow the server to time out after period of inactivity.
-* Allow the remote server to specify a complete directory to open.
-* Submit to Sublime Text Package Control
+* Awaiting Sublime Package Control Approval, will update instructions as needed.
 
 ## Copyright and license
 Copyright 2013 David Higgins
