@@ -1,0 +1,4 @@
+[
+    { "caption": "Remote Open: Start Listening", "command": "remote_open_start_server_listen" },
+    { "caption": "Remote Open: Stop Listening", "command": "remote_open_stop_server_listen" }
+]

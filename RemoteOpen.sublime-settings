@@ -1,0 +1,15 @@
+{
+	// Whether or not the plugin prints information to the python command
+	"debug": false,
+	// The address at which the server should listen
+	"address": "localhost",
+	// The port at which the server should listen
+	"port": 25252,
+	// Remote to local path mappings.
+	// These are the locations on your remote machine and their corrisponding
+	// locations on your local machine.
+	// I.e. Where you have mapped the remote locations too locally.
+	"path_maps": {
+		// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
+	}
+}
