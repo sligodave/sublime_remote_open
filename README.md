@@ -37,6 +37,10 @@ Clone this repository into your Sublime Text *Packages* directory.
 		// I.e. Where you have mapped the remote locations too locally.
 		"path_maps": {
 			// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
+			// UNIX to WINDOWS
+			// "/home/username/work": "G:/"
+			// UNIX to UNIX
+			// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
 		}
 	}
 ```
@@ -74,6 +78,12 @@ Run the supplied *subl* commmand on your remote machine, passing it a file to op
 
 The command and accompanying python will take care of the paths etc from here and
 send the request to the server to open the file on the local machine.
+
+## Troubleshooting
+
+I've had not problems so far but I'll add things here as they come up.
+
+Off hand, if you are having trouble connecting to the listening Sublime Text from your remote machine. Check to make sure that the firewall on your local machine where the Sublime Text is running allows the connection you are trying to make.
 
 ## To Do
 
