@@ -19,6 +19,8 @@ This is similar to the [rmate](http://canadian-fury.com/2012/06/26/using-textmat
 
 Clone this repository into your Sublime Text *Packages* directory.
 
+    git clone https://github.com/sligodave/sublime_remote_open.git RemoteOpen
+
 ## Configuration
 
 * Open the settings file and configure as needed.
