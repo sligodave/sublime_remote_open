@@ -102,6 +102,7 @@ Off hand, if you are having trouble connecting to the listening Sublime Text fro
 * Configuration to allow server to run automatically on startup of Sublime Text.
 * Configuration to allow the server to time out after period of inactivity.
 * Awaiting Sublime Package Control Approval, will update instructions as needed.
+* Refactor the server to use the cleaner python server classes rather than connecting and monitoring manually myself in the code.
 
 ## Copyright and license
 Copyright 2013 David Higgins
