@@ -53,8 +53,8 @@ Clone this repository into your Sublime Text *Packages* directory.
 
 * Place the contents of the *remote_machine* directory onto your remote machine.
 * Place the contents into a location on your $PATH so it will be found.
-* Ensure that the *subl* file is executable.
-* Open the *subl* file and append the *address* and *port* that you give your server above to the python command in the *subl* file.
+* Ensure that the *subl_remote_open* file is executable.
+* Open the *subl_remote_open* file and append the *address* and *port* that you give your server above to the python command in this file.
 
 For example:
 
@@ -77,9 +77,9 @@ Run the *Remote Open: Stop Listening* command from the *Go To Anything* Palette.
 ### Client / Remote Open command
 
 With Sublime Text open and the Remote Open server listening on your local machine.
-Run the supplied *subl* commmand on your remote machine, passing it a file to open.
+Run the supplied *subl_remote_open* commmand on your remote machine, passing it a file to open.
 
-    subl FILE_TO_OPEN.EXT
+    subl_remote_open FILE_TO_OPEN.EXT
 
 The command and accompanying python will take care of the paths etc from here and
 send the request to the server to open the file on the local machine.
@@ -87,7 +87,7 @@ send the request to the server to open the file on the local machine.
 You can specify a line number to open the file at also by using the ':' standard.
 E.g.
 
-    subl FILE_TO_OPEN.EXT:45
+    subl_remote_open FILE_TO_OPEN.EXT:45
 
 Will open the file with the cursor on line 45.
 

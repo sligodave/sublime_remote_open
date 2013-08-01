@@ -4,6 +4,7 @@ import sublime_plugin
 
 import os
 import os.path
+import sys
 import time
 import socket
 import threading
@@ -110,6 +111,26 @@ class RemoteOpenStartServerListenCommand(sublime_plugin.WindowCommand):
                     for file_path in file_paths:
                         file_path += line_no
                         self.window.open_file(file_path, sublime.ENCODED_POSITION)
+
+                    # Bring sublime to front
+                    if(sublime.platform() == 'osx'):
+                        # Concept from rsub, check it out! https://github.com/henrikpersson/rsub/
+                        # Calls out to system python2 as ScriptBridge isn't installed in sublimes python3
+
+                        import subprocess
+                        # The major python version matches the ST version
+                        version = sys.version_info[0]
+
+                        command = "python -c "
+                        command += "\"from ScriptingBridge import SBApplication;"
+                        command += "SBApplication.applicationWithBundleIdentifier_"
+                        command += "('com.sublimetext.%d').activate()\"" % version
+                        subprocess.call(command, shell=True)
+                    # Linux Not implemented yet. I need a box to figure it and test out on
+                    # elif(sublime.platform() == 'linux'):
+                    #     import subprocess
+                    #     subprocess.call("wmctrl -xa 'sublime_text.sublime-text-3'", shell=True)
+
                 connection.close()
                 connection = None
             except socket.timeout:
