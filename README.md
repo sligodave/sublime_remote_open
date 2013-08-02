@@ -141,7 +141,7 @@ Off hand, if you are having trouble connecting to the listening Sublime Text fro
 ## Copyright and license
 Copyright 2013 David Higgins
 
-[MIT License](LICENSE-MIT)
+[MIT License](LICENSE)
 
 
 
