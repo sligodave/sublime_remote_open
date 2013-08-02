@@ -15,6 +15,34 @@ This is similar to the [rmate](http://canadian-fury.com/2012/06/26/using-textmat
 
 ## Installation
 
+### Package Control
+
+You can install this plugin using the fantastic Sublime Package Control Plugin.
+
+You can find information and instructions on installing it here:
+[http://wbond.net/sublime_packages/package_control](http://wbond.net/sublime_packages/package_control)
+
+Once you have it installed.
+
+Open the Command palette in your Sublime Text with:
+
+On Linux and Windows:
+
+    control + shift + p
+
+On OSX:
+
+    super + shift + p
+
+From the palette, select:
+
+    Package Control: Install Package
+
+Wait for another palette to appear, which will list all available plugins, select:
+
+    RemoteOpen
+
+
 ### Git
 
 Clone this repository into your Sublime Text *Packages* directory.
@@ -24,7 +52,13 @@ Clone this repository into your Sublime Text *Packages* directory.
 ## Configuration
 
 * Open the settings file and configure as needed.
+
     Packages/User/RemoteOpen.sublime-settings
+
+To find the *Packages* directory, from the Command Palette, select:
+
+    Preferences: Browse Packages
+
 ```
 	{
 		// Whether or not the plugin prints information to the python command
@@ -49,7 +83,8 @@ Clone this repository into your Sublime Text *Packages* directory.
 		"open_directory_recursively": true
 	}
 ```
-	The above are the defaults.
+
+_The above are the defaults._
 
 * Place the contents of the *remote_machine* directory onto your remote machine.
 * Place the contents into a location on your $PATH so it will be found.
@@ -101,7 +136,6 @@ Off hand, if you are having trouble connecting to the listening Sublime Text fro
 
 * Configuration to allow server to run automatically on startup of Sublime Text.
 * Configuration to allow the server to time out after period of inactivity.
-* Awaiting Sublime Package Control Approval, will update instructions as needed.
 * Refactor the server to use the cleaner python server classes rather than connecting and monitoring manually myself in the code.
 
 ## Copyright and license
