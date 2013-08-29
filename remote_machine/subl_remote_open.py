@@ -15,7 +15,7 @@ def send_request(address='localhost', port=25252, args=None):
         print('You must supply at least a file to be '
               'opened by the listening Sublime Text')
         return
-    args[0] = os.path.abspath(args[0])
+    args = [os.path.abspath(x) for x in args]
     args = '\x0D'.join(args)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:

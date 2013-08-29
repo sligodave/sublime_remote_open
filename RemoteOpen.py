@@ -84,21 +84,47 @@ class RemoteOpenStartServerListenCommand(sublime_plugin.WindowCommand):
                 connection, address = serv.accept()
                 connection.settimeout(None)
                 args = connection.recv(self.read_rate).decode('utf-8')
+
+                # Bring sublime to front
+                if(sublime.platform() == 'osx'):
+                    # Concept from rsub, check it out! https://github.com/henrikpersson/rsub/
+                    # Calls out to system python2 as ScriptBridge isn't installed in sublimes python3
+
+                    import subprocess
+                    # The major python version matches the ST version
+                    version = sys.version_info[0]
+
+                    command = "python -c "
+                    command += "\"from ScriptingBridge import SBApplication;"
+                    command += "SBApplication.applicationWithBundleIdentifier_"
+                    command += "('com.sublimetext.%d').activate()\"" % version
+                    subprocess.call(command, shell=True)
+                # Linux Not implemented yet. I need a box to figure it and test out on
+                # elif(sublime.platform() == 'linux'):
+                #     import subprocess
+                #     subprocess.call("wmctrl -xa 'sublime_text.sublime-text-3'", shell=True)
+
                 args = args.split('\x0D')
-                org_path = path = args[0]
-                line_no = ''
-                loc = path.rfind(':')
-                if loc != -1 and path[loc + 1:].isdigit():
-                    line_no = ':' + path[loc + 1:]
-                    path = path[:loc]
-                log('Remote Path Received: "%s"' % path)
-                path = remote_to_local(path)
-                log('Local Path Generated: "%s"' % path)
-                if not os.path.exists(path):
-                    sublime.status_message('Could not map and open "%s"' % org_path)
-                    log('Path "%s" from "%s" does not exist' % (path, org_path))
-                else:
-                    file_paths = [path]
+                org_paths = paths = args
+                line_nos = []
+
+                for i in range(len(paths)):
+                    path = paths[i]
+                    line_nos.append('')
+                    loc = path.rfind(':')
+                    if loc != -1 and path[loc + 1:].isdigit():
+                        line_nos[-1] = ':' + path[loc + 1:]
+                        paths[i] = path[:loc]
+                log('Remote Paths Received: %s' % paths)
+                for i in range(len(paths)):
+                    paths[i] = remote_to_local(paths[i])
+                log('Local Path Generated: %s' % paths)
+
+                for i, path in enumerate(paths):
+                    if not os.path.exists(path):
+                        sublime.status_message('Could not map and open "%s"' % org_paths[i])
+                        log('Path "%s" from "%s" does not exist' % (path, org_paths[i]))
+                        continue
                     if os.path.isdir(path):
                         if settings.get('open_directory_contents', True):
                             file_paths = get_file_paths(
@@ -108,28 +134,12 @@ class RemoteOpenStartServerListenCommand(sublime_plugin.WindowCommand):
                         else:
                             sublime.status_message('RemoteOpen: Not configured to open directories, so "%s" ignored.' % path)
                             log('Not configured to open directories, so "%s" ignored.' % path)
+                    else:
+                        file_paths = ['%s%s' % (path, line_nos[i])]
                     for file_path in file_paths:
-                        file_path += line_no
+                        sublime.status_message('RemoteOpen: Opening file "%s"' % file_path)
+                        log('Opening file "%s" from "%s"' % (file_path, org_paths[i]))
                         self.window.open_file(file_path, sublime.ENCODED_POSITION)
-
-                    # Bring sublime to front
-                    if(sublime.platform() == 'osx'):
-                        # Concept from rsub, check it out! https://github.com/henrikpersson/rsub/
-                        # Calls out to system python2 as ScriptBridge isn't installed in sublimes python3
-
-                        import subprocess
-                        # The major python version matches the ST version
-                        version = sys.version_info[0]
-
-                        command = "python -c "
-                        command += "\"from ScriptingBridge import SBApplication;"
-                        command += "SBApplication.applicationWithBundleIdentifier_"
-                        command += "('com.sublimetext.%d').activate()\"" % version
-                        subprocess.call(command, shell=True)
-                    # Linux Not implemented yet. I need a box to figure it and test out on
-                    # elif(sublime.platform() == 'linux'):
-                    #     import subprocess
-                    #     subprocess.call("wmctrl -xa 'sublime_text.sublime-text-3'", shell=True)
 
                 connection.close()
                 connection = None
