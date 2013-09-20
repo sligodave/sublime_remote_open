@@ -167,6 +167,7 @@ def remote_to_local(path):
             if local.endswith('/'):
                 local = local[:-1]
             path = local + '/' + common
+            break
     path = path.replace('\\', '/')
     return path
 
