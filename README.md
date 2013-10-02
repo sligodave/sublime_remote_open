@@ -63,30 +63,30 @@ To find the *Packages* directory, from the Command Palette, select:
     Preferences: Browse Packages
 
 ```
-	{
-		// Whether or not the plugin prints information to the python command
-		"debug": false,
-		// The host at which the server should listen. E.g. 192.186.0.X
-		"host": "localhost",
-		// The port at which the server should listen
-		"port": 25252,
-		// Remote to local path mappings.
-		// These are the locations on your remote machine and their corresponding
-		// locations on your local machine.
-		// I.e. Where you have mapped the remote locations too locally.
-		"path_maps": {
-			// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
-			// "/home/username/work": "G:/"
-			// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
-		},
-		// Should the server open all files in a directory when one is sent
-		"open_directory_contents": true,
-		// Should the server open all files recursively in a directories sub structure.
-		// Requires "open_directories" to be
-		"open_directory_recursively": true,
-		// runs the listening server when sublime starts.
-		"listen_on_startup": true
-	}
+{
+	// Whether or not the plugin prints information to the python command
+	"debug": false,
+	// The host at which the server should listen. E.g. 192.186.0.X
+	"host": "localhost",
+	// The port at which the server should listen
+	"port": 25252,
+	// Remote to local path mappings.
+	// These are the locations on your remote machine and their corresponding
+	// locations on your local machine.
+	// I.e. Where you have mapped the remote locations too locally.
+	"path_maps": {
+		// "/REMOTE/PATH/BASE": "/LOCAL/PATH/BASE"
+		// "/home/username/work": "G:/"
+		// "/home/username_remote/work": "/home/username_local/maps/remote_home_dir/work"
+	},
+	// Should the server open all files in a directory when one is sent
+	"open_directory_contents": true,
+	// Should the server open all files recursively in a directories sub structure.
+	// Requires "open_directories" to be
+	"open_directory_recursively": true,
+	// runs the listening server when sublime starts.
+	"listen_on_startup": true
+}	
 ```
 
 _The above are the defaults._
@@ -141,6 +141,7 @@ I've had not problems so far but I'll add things here as they come up.
 Off hand, if you are having trouble connecting to the listening Sublime Text from your remote machine. Check to make sure that the firewall on your local machine where the Sublime Text is running allows the connection you are trying to make.
 
 *Remote machine can no longer see server*
+
 I did a major overhaul of the code to use a much saner threading server, in doing so I renamed the "address" setting to "host".
 So you can fix this problem by updating your RemoteOpen.sublime-settings file.
 
