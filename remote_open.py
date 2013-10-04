@@ -212,4 +212,4 @@ def listen_on_startup():
         sublime.active_window().run_command('remote_open_start_server')
 
 
-sublime.set_timeout(listen_on_startup, 2000)
+sublime.set_timeout(listen_on_startup, 5000)
