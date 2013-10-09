@@ -121,6 +121,10 @@ From the *Go To Anything* Palette:
 	Remote Open: Stop Listening
 
 
+*NOTE:*
+You can also set the server to start automatically when Sublime Starts using the "listen_on_startup" setting.
+
+
 ### Client / Remote Open command
 
 With Sublime Text open and the Remote Open server listening on your local machine.
