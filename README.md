@@ -113,12 +113,12 @@ becomes:
 To start the server in your Sublime Text so that it will listen for remote requests.
 From the *Go To Anything* Palette:
 
-	"Remote Open: Start Listening"
+	Remote Open: Start Listening
 
 To stop the server.
 From the *Go To Anything* Palette:
 
-	"Remote Open: Stop Listening"
+	Remote Open: Stop Listening
 
 
 ### Client / Remote Open command
