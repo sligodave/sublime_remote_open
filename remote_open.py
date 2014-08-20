@@ -153,7 +153,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
         log('Local Paths Generated: "%s"' % paths)
 
         for i, path in enumerate(paths):
-            if not os.path.exists(path):
+            if not os.path.exists(path) and not get_settings('create_if_missing', True):
                 sublime.status_message(log('Path "%s" from "%s" does not exist' % (path, org_paths[i])))
                 continue
             if os.path.isdir(path):

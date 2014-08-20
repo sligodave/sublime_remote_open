@@ -20,5 +20,6 @@
 	// Requires "open_directories" to be
 	"open_directory_recursively": true,
 	// runs the listening server when sublime starts.
-	"listen_on_startup": true
+	"listen_on_startup": true,
+	"create_if_missing": true
 }
